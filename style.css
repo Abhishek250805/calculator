@@ -1,0 +1,1310 @@
+/* ==========================================================================
+   AuraCalc Design System & Core Stylesheets
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Dynamic CSS Variables & Thematic Color Tokens
+   -------------------------------------------------------------------------- */
+:root {
+    --transition-speed: 0.3s;
+    --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --border-radius-sm: 16px;
+    --border-radius-md: 26px;
+    --border-radius-lg: 38px;
+    --border-radius-pill: 9999px;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
+/* Nebula Deep (Dark Violet) */
+body[data-theme="nebula"] {
+    --bg-base: #06070a;
+    --bg-sidebar: rgba(7, 8, 11, 0.35);
+    --card-base: rgba(18, 20, 32, 0.55);
+    --card-border: rgba(255, 255, 255, 0.09);
+    --text-primary: #ffffff;
+    --text-secondary: #8e95b3;
+    --accent-primary: #a855f7;
+    --accent-secondary: #06b6d4;
+    --accent-gradient: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+    --accent-glow: rgba(168, 85, 247, 0.4);
+    --btn-calc-bg: rgba(255, 255, 255, 0.03);
+    --btn-calc-hover: rgba(255, 255, 255, 0.08);
+    --btn-calc-active: rgba(255, 255, 255, 0.14);
+    --btn-utility-bg: rgba(138, 180, 248, 0.08);
+    --btn-utility-hover: rgba(138, 180, 248, 0.16);
+    --btn-utility-color: #8ab4f8;
+    --btn-eval-glow: rgba(6, 182, 212, 0.3);
+    --shadow-premium: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+    --canvas-grid-base: #0c0d12;
+}
+
+/* Emerald Aurora (Dark Teal) */
+body[data-theme="aurora"] {
+    --bg-base: #030806;
+    --bg-sidebar: rgba(4, 8, 7, 0.35);
+    --card-base: rgba(10, 22, 18, 0.55);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f0fdf4;
+    --text-secondary: #7fa396;
+    --accent-primary: #10b981;
+    --accent-secondary: #84cc16;
+    --accent-gradient: linear-gradient(135deg, #10b981 0%, #84cc16 100%);
+    --accent-glow: rgba(16, 185, 129, 0.4);
+    --btn-calc-bg: rgba(255, 255, 255, 0.03);
+    --btn-calc-hover: rgba(255, 255, 255, 0.07);
+    --btn-calc-active: rgba(255, 255, 255, 0.13);
+    --btn-utility-bg: rgba(52, 211, 153, 0.09);
+    --btn-utility-hover: rgba(52, 211, 153, 0.18);
+    --btn-utility-color: #34d399;
+    --btn-eval-glow: rgba(132, 204, 22, 0.3);
+    --shadow-premium: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+    --canvas-grid-base: #060c09;
+}
+
+/* Cyberpunk 2077 (Neon contrast) */
+body[data-theme="cyberpunk"] {
+    --bg-base: #040508;
+    --bg-sidebar: rgba(5, 6, 8, 0.45);
+    --card-base: rgba(14, 15, 20, 0.65);
+    --card-border: rgba(254, 221, 0, 0.15);
+    --text-primary: #ffffff;
+    --text-secondary: #9098a6;
+    --accent-primary: #fedd00;
+    --accent-secondary: #00f2fe;
+    --accent-gradient: linear-gradient(135deg, #fedd00 0%, #00f2fe 100%);
+    --accent-glow: rgba(254, 221, 0, 0.3);
+    --btn-calc-bg: rgba(255, 255, 255, 0.04);
+    --btn-calc-hover: rgba(254, 221, 0, 0.12);
+    --btn-calc-active: rgba(254, 221, 0, 0.22);
+    --btn-utility-bg: rgba(0, 242, 254, 0.09);
+    --btn-utility-hover: rgba(0, 242, 254, 0.18);
+    --btn-utility-color: #00f2fe;
+    --btn-eval-glow: rgba(254, 221, 0, 0.4);
+    --shadow-premium: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+    --canvas-grid-base: #090a0d;
+}
+
+/* Sakura Blush (Warm light pastel) */
+body[data-theme="sakura"] {
+    --bg-base: #faf0f2;
+    --bg-sidebar: rgba(242, 231, 233, 0.45);
+    --card-base: rgba(255, 255, 255, 0.55);
+    --card-border: rgba(219, 112, 147, 0.15);
+    --text-primary: #3d1f27;
+    --text-secondary: #91757c;
+    --accent-primary: #ec4899;
+    --accent-secondary: #f43f5e;
+    --accent-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    --accent-glow: rgba(236, 72, 153, 0.25);
+    --btn-calc-bg: rgba(219, 112, 147, 0.05);
+    --btn-calc-hover: rgba(219, 112, 147, 0.12);
+    --btn-calc-active: rgba(219, 112, 147, 0.2);
+    --btn-utility-bg: rgba(244, 63, 94, 0.08);
+    --btn-utility-hover: rgba(244, 63, 94, 0.16);
+    --btn-utility-color: #f43f5e;
+    --btn-eval-glow: rgba(244, 63, 94, 0.2);
+    --shadow-premium: 0 20px 45px -10px rgba(145, 117, 124, 0.15);
+    --canvas-grid-base: #f9f2f4;
+}
+
+/* Polar Frost (Cold light blue) */
+body[data-theme="polar"] {
+    --bg-base: #ebf3f7;
+    --bg-sidebar: rgba(226, 236, 243, 0.45);
+    --card-base: rgba(255, 255, 255, 0.55);
+    --card-border: rgba(59, 130, 246, 0.15);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent-primary: #3b82f6;
+    --accent-secondary: #06b6d4;
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    --accent-glow: rgba(59, 130, 246, 0.25);
+    --btn-calc-bg: rgba(59, 130, 246, 0.05);
+    --btn-calc-hover: rgba(59, 130, 246, 0.11);
+    --btn-calc-active: rgba(59, 130, 246, 0.18);
+    --btn-utility-bg: rgba(6, 182, 212, 0.07);
+    --btn-utility-hover: rgba(6, 182, 212, 0.15);
+    --btn-utility-color: #0891b2;
+    --btn-eval-glow: rgba(6, 182, 212, 0.2);
+    --shadow-premium: 0 20px 45px -10px rgba(94, 116, 139, 0.12);
+    --canvas-grid-base: #eff5f8;
+}
+
+/* --------------------------------------------------------------------------
+   2. Page Layout Reset & Main Structural Container
+   -------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent; /* Remove browser touch gray highlight boxes on mobile */
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-base);
+    background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 80%);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Floating background blurs for glassmorphism projection */
+.bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.22;
+    z-index: 1;
+    pointer-events: none;
+    transition: background 0.8s ease;
+}
+.orb-1 {
+    width: 45vw;
+    height: 45vw;
+    background: var(--accent-primary);
+    top: -10vw;
+    left: -5vw;
+    animation: float-drift-1 25s infinite alternate ease-in-out;
+}
+.orb-2 {
+    width: 40vw;
+    height: 40vw;
+    background: var(--accent-secondary);
+    bottom: -8vw;
+    right: -5vw;
+    animation: float-drift-2 28s infinite alternate ease-in-out;
+}
+@keyframes float-drift-1 {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50% { transform: translate(8%, 10%) scale(1.1) rotate(180deg); }
+    100% { transform: translate(-5%, -4%) scale(0.95) rotate(360deg); }
+}
+@keyframes float-drift-2 {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50% { transform: translate(-10%, -6%) scale(0.9) rotate(-180deg); }
+    100% { transform: translate(6%, 8%) scale(1.12) rotate(-360deg); }
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    height: 94vh;
+    width: 96vw;
+    max-width: 1440px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-premium);
+    overflow: hidden;
+    z-index: 2;
+    transition: border-color var(--transition-speed);
+}
+
+/* --------------------------------------------------------------------------
+   3. Sidebar - Settings Panels, Theme selection, History Tape
+   -------------------------------------------------------------------------- */
+.sidebar-panel {
+    background-color: var(--bg-sidebar);
+    backdrop-filter: blur(25px) saturate(180%);
+    border-right: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px; /* Highly compact padding */
+    height: 100%;
+    z-index: 10;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    
+    /* Elegant scrolling behaviors for tiny screen spaces */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Thin custom scrollbar on sidebar viewport constraints */
+.sidebar-panel::-webkit-scrollbar {
+    width: 4px;
+}
+.sidebar-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar-panel::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 2px;
+}
+.sidebar-panel::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 16px; /* Compact margin */
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.logo-aura {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-calc {
+    color: var(--text-primary);
+}
+
+.section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px; /* Tighter padding */
+}
+
+/* Sidebar navigation pills */
+.mode-navigation {
+    margin-bottom: 14px; /* Tighter spacing margins */
+}
+
+.nav-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 14px; /* Shorter vertical padding pills */
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.nav-pill:hover {
+    background-color: var(--card-base);
+    color: var(--text-primary);
+}
+
+.nav-pill.active {
+    background: var(--accent-gradient);
+    color: #ffffff;
+    box-shadow: 0 8px 20px -6px var(--accent-glow);
+}
+
+.pill-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background-color: var(--card-border);
+    margin: 12px 0; /* Compact dividers */
+}
+
+/* Theme circles grid selector */
+.settings-group {
+    margin-bottom: 12px; /* Compact margin groups */
+}
+
+.theme-grid {
+    display: flex;
+    gap: 10px;
+}
+
+.theme-selector {
+    background: var(--card-base);
+    border: 1px solid var(--card-border);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s var(--transition-bounce), border-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    transform: scale(1.15);
+}
+
+.theme-selector.active {
+    border-color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+.color-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.color-nebula { background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%); }
+.color-aurora { background: linear-gradient(135deg, #10b981 0%, #84cc16 100%); }
+.color-cyberpunk { background: linear-gradient(135deg, #fedd00 0%, #00f2fe 100%); }
+.color-sakura { background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%); }
+.color-polar { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); }
+
+/* Sound toggle slider design */
+.sound-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sound-toggle-container .section-title {
+    margin-bottom: 0;
+}
+
+.switch-control {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.switch-control input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-round {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--card-border);
+    border: 1px solid var(--card-border);
+    transition: 0.3s;
+    border-radius: 20px;
+}
+
+.slider-round:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-secondary);
+    transition: 0.3s var(--transition-bounce);
+    border-radius: 50%;
+}
+
+input:checked + .slider-round {
+    background: var(--accent-gradient);
+}
+
+input:checked + .slider-round:before {
+    transform: translateX(18px);
+    background-color: #ffffff;
+}
+
+.switch-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* History tape container list styling */
+.history-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* Important for flex-child scrolling */
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.history-title {
+    margin-bottom: 0;
+}
+
+.btn-clear-history {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+}
+
+.btn-clear-history:hover {
+    color: var(--accent-primary);
+}
+
+.history-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+}
+
+/* Customize thin custom scrollbars */
+.history-list::-webkit-scrollbar {
+    width: 4px;
+}
+.history-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.history-list::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 2px;
+}
+.history-list::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+.history-empty-state {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 20px 0;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.history-card {
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-primary);
+}
+
+.history-card-label {
+    align-self: flex-start;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent-secondary);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.history-card-expr {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
+
+.history-card-res {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Keyboard Info Footer HUD */
+.keyboard-hud-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    padding: 8px 10px; /* Tighter footer size */
+    border-radius: var(--border-radius-md);
+    margin-top: 10px;
+}
+
+.keyboard-icon {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.keyboard-text {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Content Area - Workspace container settings
+   -------------------------------------------------------------------------- */
+.main-content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.workspace {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(15px);
+    transition: opacity 0.35s ease, transform 0.35s var(--transition-bounce);
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.workspace-heading {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+.workspace-subheading {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Standard Calculator Workspace (Tactile click keyboard design)
+   -------------------------------------------------------------------------- */
+.standard-grid-container {
+    max-width: 360px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.display-card {
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    padding: 20px 24px;
+    text-align: right;
+    backdrop-filter: blur(25px) saturate(180%);
+    box-shadow: var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 120px;
+    transition: border-color var(--transition-speed);
+}
+
+.display-history {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--text-secondary);
+    min-height: 20px;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow-x: auto;
+    direction: ltr;
+}
+
+/* Hide horizontal scrollbar for displays */
+.display-history::-webkit-scrollbar,
+.display-current::-webkit-scrollbar {
+    display: none;
+}
+
+.display-current {
+    font-family: var(--font-mono);
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    white-space: nowrap;
+    overflow-x: auto;
+    direction: ltr;
+}
+
+.calculator-pad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.calc-btn {
+    border: 1px solid var(--card-border);
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 700;
+    height: 60px;
+    width: 100%;
+    border-radius: var(--border-radius-pill); /* Beautiful oval capsule shapes! */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--btn-calc-bg);
+    color: var(--text-primary);
+    position: relative;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15); /* 3D depth shadow */
+    transition: all 0.08s ease;
+}
+
+.calc-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius-pill);
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.calc-btn:hover {
+    background-color: var(--btn-calc-hover);
+}
+
+.calc-btn:hover::after {
+    opacity: 1;
+}
+
+.calc-btn:active,
+.calc-btn.simulated-active {
+    transform: translateY(2px); /* Tighter springy depth */
+    box-shadow: 0 0 15px var(--accent-primary); /* Beautiful glowing drop shadow! */
+    border-color: var(--accent-primary);
+    background-color: var(--btn-calc-active);
+}
+
+.calc-btn.double-width {
+    grid-column: span 2;
+}
+
+.calc-btn.operator {
+    color: var(--accent-primary);
+    font-size: 20px;
+}
+
+.calc-btn.utility {
+    color: var(--btn-utility-color);
+    background-color: var(--btn-utility-bg);
+}
+
+.calc-btn.utility:hover {
+    background-color: var(--btn-utility-hover);
+}
+
+.calc-btn.evaluate-btn {
+    background: var(--accent-gradient);
+    color: #ffffff;
+    border: none;
+    font-size: 22px;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15), 0 8px 16px -4px var(--btn-eval-glow);
+}
+
+.calc-btn.evaluate-btn:active,
+.calc-btn.evaluate-btn.simulated-active {
+    transform: translateY(2px);
+    box-shadow: 0 0 22px var(--accent-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   6. Expression Studio & SVG AST Parser Tree
+   -------------------------------------------------------------------------- */
+.studio-layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    gap: 20px;
+}
+
+.expression-console {
+    display: flex;
+    gap: 12px;
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-pill);
+    backdrop-filter: blur(12px);
+}
+
+#studio-input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--text-primary);
+    padding: 10px 4px;
+}
+
+#studio-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.studio-eval-btn {
+    background: var(--accent-gradient);
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    padding: 0 20px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    box-shadow: 0 4px 12px -3px var(--accent-glow);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.studio-eval-btn:active {
+    transform: scale(0.97);
+}
+
+.studio-feedback-bar {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin-top: 8px;
+    color: var(--text-secondary);
+}
+
+.studio-feedback-bar.error {
+    color: #ff0055;
+}
+
+.studio-feedback-bar.success {
+    color: var(--accent-secondary);
+}
+
+.studio-visualization-block {
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.viz-header {
+    border-bottom: 1px solid var(--card-border);
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.viz-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.viz-subtitle {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.svg-viz-container {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+#ast-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-empty-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* AST SVG Node styles */
+.ast-node-link {
+    fill: none;
+    stroke: var(--card-border);
+    stroke-width: 2.5;
+    transition: stroke var(--transition-speed);
+}
+
+.ast-node-link.glow {
+    stroke: var(--accent-secondary);
+    filter: drop-shadow(0 0 4px var(--accent-secondary));
+}
+
+.ast-node-circle {
+    fill: var(--bg-base);
+    stroke: var(--accent-primary);
+    stroke-width: 3;
+    cursor: pointer;
+    transition: fill 0.2s ease, stroke-width 0.2s ease;
+}
+
+.ast-node-circle:hover {
+    fill: var(--accent-primary);
+    stroke-width: 4;
+}
+
+.ast-node-circle.leaf {
+    stroke: var(--accent-secondary);
+}
+
+.ast-node-circle.leaf:hover {
+    fill: var(--accent-secondary);
+}
+
+.ast-node-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--text-primary);
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Visual 2D Grapher Workspace (Grid Canvas & Function presets)
+   -------------------------------------------------------------------------- */
+.grapher-layout {
+    display: grid;
+    grid-template-columns: 310px 1fr;
+    height: 100%;
+    gap: 24px;
+}
+
+.grapher-left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grapher-input-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    padding: 12px 20px;
+    border-radius: var(--border-radius-pill);
+    backdrop-filter: blur(12px);
+    transition: border-color var(--transition-speed);
+}
+
+.grapher-input-card:focus-within {
+    border-color: var(--accent-primary);
+}
+
+.grapher-input-prefix {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-secondary);
+    margin-right: 8px;
+}
+
+#grapher-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-primary);
+    width: 100%;
+}
+
+.grapher-error-log {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+    min-height: 16px;
+    margin-top: -12px;
+}
+
+.grapher-error-log.error {
+    color: #ff0055;
+}
+
+/* Preset Chips matrices buttons styling */
+.preset-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.preset-heading {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.preset-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.preset-chip {
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preset-chip:hover {
+    border-color: var(--accent-secondary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.preset-chip.active {
+    background: var(--accent-gradient);
+    border-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Pan & Zoom instructions */
+.navigation-instruction {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    padding: 12px;
+    border-radius: var(--border-radius-md);
+}
+
+.instruction-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-badge {
+    background-color: var(--card-border);
+    color: var(--text-primary);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.action-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.btn-reset-viewport {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    padding: 12px;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-reset-viewport:hover {
+    background-color: var(--card-base);
+    border-color: var(--text-primary);
+}
+
+.grapher-right-panel {
+    flex-grow: 1;
+    background-color: var(--card-base);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-lg);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-premium);
+    overflow: hidden;
+    position: relative;
+}
+
+.canvas-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: grab;
+}
+
+#graph-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   8. Global UI Micro-animations & Keystroke Glow Feedbacks
+   -------------------------------------------------------------------------- */
+.keystroke-overlay {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: rgba(15, 16, 22, 0.9);
+    border: 1.5px solid var(--accent-primary);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: var(--border-radius-pill);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transition: opacity 0.15s ease, transform 0.15s var(--transition-bounce);
+    box-shadow: 0 8px 24px -6px var(--accent-glow);
+    z-index: 100;
+}
+
+.keystroke-overlay.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   9. Mobile Responsive Layout Constraints
+   -------------------------------------------------------------------------- */
+.mobile-top-bar {
+    display: none;
+}
+
+.mobile-sidebar-overlay {
+    display: none;
+}
+
+/* Tablet constraints & general responsive layout adjustments */
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 260px 1fr;
+        height: 96vh;
+        width: 98vw;
+    }
+}
+
+/* Mobile specifically (Phones <= 768px screen sizes) */
+@media (max-width: 768px) {
+    /* Hide desktop background drifting blobs overlay on small touch screens for performance */
+    .bg-orb {
+        filter: blur(100px);
+        opacity: 0.15;
+    }
+
+    /* Unbound card centering to fill screen */
+    body {
+        align-items: stretch;
+        justify-content: stretch;
+    }
+
+    .app-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: 100vh;
+        width: 100vw;
+        max-width: none;
+        border: none;
+        border-radius: 0;
+        backdrop-filter: none;
+        box-shadow: none;
+    }
+
+    /* Mobile Header */
+    .mobile-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+        padding: 0 16px;
+        background-color: var(--bg-sidebar);
+        backdrop-filter: blur(25px) saturate(180%);
+        border-bottom: 1px solid var(--card-border);
+        z-index: 90;
+    }
+
+    .mobile-menu-toggle {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .toggle-icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+    }
+
+    .mobile-brand {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+
+    /* Sidebar Drawer Slide */
+    .sidebar-panel {
+        position: fixed;
+        top: 0;
+        left: -290px;
+        width: 290px;
+        height: 100vh;
+        border-radius: 0 !important;
+        border-right: 1px solid var(--card-border);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.45);
+        z-index: 100;
+        transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .sidebar-panel.open {
+        left: 0;
+    }
+
+    /* Translucent Sidebar drawer overlay */
+    .mobile-sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 99;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Brand Header can be smaller inside the drawer menu since mobile-top-bar has it */
+    .brand-header {
+        margin-bottom: 12px;
+        font-size: 18px;
+    }
+
+    .main-content {
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .workspace {
+        position: relative;
+        height: auto;
+        min-height: 100%;
+        padding: 16px;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none !important;
+        display: none; /* Hide inactive layouts completely */
+    }
+
+    .workspace.active {
+        display: flex;
+    }
+
+    /* Workspaces layout vertical stacks */
+    .studio-layout {
+        grid-template-rows: auto auto;
+        gap: 16px;
+    }
+
+    .studio-visualization-block {
+        min-height: 300px;
+        height: 300px;
+    }
+
+    .grapher-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 16px;
+    }
+
+    .grapher-left-panel {
+        order: 1;
+    }
+
+    .grapher-right-panel {
+        height: 320px;
+        order: 2; /* Plot sits below controls on phone screens */
+    }
+}
