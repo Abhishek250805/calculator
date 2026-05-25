@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraCalc - The Premium Interactive Math Studio</title>
+    
+    <!-- Meta tags for premium styling & SEO -->
+    <meta name="description" content="AuraCalc is an immersive, high-end interactive mathematical playground, expression parser, and function grapher with visual AST modeling and responsive keyboard support.">
+    <meta name="author" content="Antigravity AI">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="nebula">
+    <!-- Frosted Glass background blur blobs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="app-container">
+        <!-- Mobile Top Header Bar -->
+        <header class="mobile-top-bar">
+            <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle settings menu">
+                <svg class="toggle-icon" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+            </button>
+            <div class="mobile-brand">
+                <span class="logo-aura">AURA</span><span class="logo-calc">CALC</span>
+            </div>
+            <div style="width: 24px;"></div> <!-- Spacer to align center logo -->
+        </header>
+
+        <!-- Sidebar overlay dark mask -->
+        <div class="mobile-sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- ==================== SIDEBAR CONTROL PANEL ==================== -->
+        <aside class="sidebar-panel">
+            <div class="brand-header">
+                <span class="logo-aura">AURA</span><span class="logo-calc">CALC</span>
+            </div>
+
+            <nav class="mode-navigation">
+                <p class="section-title">CALCULATOR WORKSPACE</p>
+                <div class="nav-pills">
+                    <button class="nav-pill active" id="pill-standard" data-target="standard-workspace">
+                        <svg class="pill-icon" viewBox="0 0 24 24"><path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z M7,11h2v2H7V11z M7,7h2v2H7V7z M7,15h2v2H7V15z M11,11h2v2h-2V11z M11,7h2v2h-2V7z M11,15h2v2h-2V15z M15,11h2v6h-2V11z M15,7h2v2h-2V7z"/></svg>
+                        <span>Standard Pad</span>
+                    </button>
+                    <button class="nav-pill" id="pill-studio" data-target="studio-workspace">
+                        <svg class="pill-icon" viewBox="0 0 24 24"><path d="M9.4,16.6L4.8,12l4.6-4.6L8,6l-6,6l6,6L9.4,16.6z M14.6,16.6l4.6-4.6l-4.6-4.6L16,6l6,6l-6,6L14.6,16.6z M14.4,4.2L12.4,4L9.6,19.8l2,0.2L14.4,4.2z"/></svg>
+                        <span>Expression Studio</span>
+                    </button>
+                    <button class="nav-pill" id="pill-grapher" data-target="grapher-workspace">
+                        <svg class="pill-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                        <span>Visual Grapher</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="settings-group">
+                <p class="section-title">THEME ENGINE</p>
+                <div class="theme-grid">
+                    <button class="theme-selector active" data-theme="nebula" title="Nebula Deep">
+                        <span class="color-dot color-nebula"></span>
+                    </button>
+                    <button class="theme-selector" data-theme="aurora" title="Emerald Aurora">
+                        <span class="color-dot color-aurora"></span>
+                    </button>
+                    <button class="theme-selector" data-theme="cyberpunk" title="Cyberpunk 2077">
+                        <span class="color-dot color-cyberpunk"></span>
+                    </button>
+                    <button class="theme-selector" data-theme="sakura" title="Sakura Blush">
+                        <span class="color-dot color-sakura"></span>
+                    </button>
+                    <button class="theme-selector" data-theme="polar" title="Polar Frost">
+                        <span class="color-dot color-polar"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-group sound-toggle-container">
+                <p class="section-title">AUDIO ENGINE</p>
+                <label class="switch-control">
+                    <input type="checkbox" id="sound-switch" checked>
+                    <span class="slider-round"></span>
+                </label>
+                <span class="switch-label">Mechanical Clicks</span>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <!-- ==================== CALCULATION HISTORY TAPE ==================== -->
+            <div class="history-container">
+                <div class="history-header">
+                    <span class="section-title history-title">CALCULATION TAPE</span>
+                    <button class="btn-clear-history" id="clear-history" title="Clear entire history">Clear</button>
+                </div>
+                <div class="history-list" id="history-log">
+                    <div class="history-empty-state">No equations in memory</div>
+                </div>
+            </div>
+
+            <!-- ==================== KEYBOARD GUIDE FOOTER ==================== -->
+            <footer class="keyboard-hud-info">
+                <div class="keyboard-icon">⌨</div>
+                <div class="keyboard-text">Full physical keyboard support enabled. Tap keys freely.</div>
+            </footer>
+        </aside>
+
+        <!-- ==================== MAIN DISPLAY WORKSPACES ==================== -->
+        <main class="main-content">
+            
+            <!-- 1. STANDARD WORKSPACE -->
+            <section class="workspace active" id="standard-workspace">
+                <div class="standard-grid-container">
+                    <div class="display-card">
+                        <div class="display-history" id="std-display-history"></div>
+                        <div class="display-current" id="std-display-current">0</div>
+                    </div>
+                    
+                    <div class="calculator-pad">
+                        <!-- Row 1 -->
+                        <button class="calc-btn utility" data-action="clear" id="key-ac">AC</button>
+                        <button class="calc-btn utility" data-action="backspace" id="key-backspace">⌫</button>
+                        <button class="calc-btn operator" data-value="^" id="key-pow">xʸ</button>
+                        <button class="calc-btn operator" data-value="/" id="key-div">÷</button>
+                        
+                        <!-- Row 2 -->
+                        <button class="calc-btn digit" data-value="7" id="key-7">7</button>
+                        <button class="calc-btn digit" data-value="8" id="key-8">8</button>
+                        <button class="calc-btn digit" data-value="9" id="key-9">9</button>
+                        <button class="calc-btn operator" data-value="*" id="key-mul">×</button>
+                        
+                        <!-- Row 3 -->
+                        <button class="calc-btn digit" data-value="4" id="key-4">4</button>
+                        <button class="calc-btn digit" data-value="5" id="key-5">5</button>
+                        <button class="calc-btn digit" data-value="6" id="key-6">6</button>
+                        <button class="calc-btn operator" data-value="-" id="key-minus">-</button>
+                        
+                        <!-- Row 4 -->
+                        <button class="calc-btn digit" data-value="1" id="key-1">1</button>
+                        <button class="calc-btn digit" data-value="2" id="key-2">2</button>
+                        <button class="calc-btn digit" data-value="3" id="key-3">3</button>
+                        <button class="calc-btn operator" data-value="+" id="key-plus">+</button>
+                        
+                        <!-- Row 5 -->
+                        <button class="calc-btn digit double-width" data-value="0" id="key-0">0</button>
+                        <button class="calc-btn digit" data-value="." id="key-dot">.</button>
+                        <button class="calc-btn evaluate-btn" data-action="equal" id="key-equal">=</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. EXPRESSION STUDIO WORKSPACE -->
+            <section class="workspace" id="studio-workspace">
+                <div class="studio-layout">
+                    <div class="studio-input-block">
+                        <h2 class="workspace-heading">Expression Studio</h2>
+                        <p class="workspace-subheading">Compose custom algebraic equations with full operator precedence.</p>
+                        
+                        <div class="expression-console">
+                            <input type="text" id="studio-input" placeholder="Enter expression: (5 + 3) * sqrt(16) - ln(e)" autofocus autocomplete="off" spellcheck="false">
+                            <button class="studio-eval-btn" id="btn-studio-eval">EVALUATE</button>
+                        </div>
+                        <div class="studio-feedback-bar" id="studio-feedback">Ready</div>
+                    </div>
+
+                    <div class="studio-visualization-block">
+                        <div class="viz-header">
+                            <span class="viz-title">Dynamic Abstract Syntax Tree (AST) Visualizer</span>
+                            <span class="viz-subtitle">See mathematical compiler structure and precedence resolution in real-time</span>
+                        </div>
+                        <div class="svg-viz-container" id="ast-container">
+                            <svg id="ast-svg" width="100%" height="100%"></svg>
+                            <div class="ast-empty-message" id="ast-empty">Type an algebraic expression above to visualize parsing tree</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. VISUAL GRAPHER WORKSPACE -->
+            <section class="workspace" id="grapher-workspace">
+                <div class="grapher-layout">
+                    <div class="grapher-left-panel">
+                        <h2 class="workspace-heading">Visual Function Grapher</h2>
+                        <p class="workspace-subheading">Type mathematical formulas with 'x' variable to plot curves in real-time.</p>
+                        
+                        <div class="grapher-input-card">
+                            <div class="grapher-input-prefix">f(x) =</div>
+                            <input type="text" id="grapher-input" value="sin(x) * x" placeholder="x^2 - 4" autocomplete="off" spellcheck="false">
+                        </div>
+                        <div class="grapher-error-log" id="grapher-feedback">Successfully drawn</div>
+
+                        <div class="preset-section">
+                            <span class="preset-heading">PRESET MATRICES</span>
+                            <div class="preset-chips">
+                                <button class="preset-chip" data-equation="sin(x) * x">f(x) = sin(x) * x</button>
+                                <button class="preset-chip" data-equation="x^2 - 3x + 1">f(x) = x² - 3x + 1</button>
+                                <button class="preset-chip" data-equation="abs(x) - 4">f(x) = |x| - 4</button>
+                                <button class="preset-chip" data-equation="1 / x">f(x) = 1 / x</button>
+                                <button class="preset-chip" data-equation="sin(x) + cos(2x)">f(x) = sin(x) + cos(2x)</button>
+                                <button class="preset-chip" data-equation="exp(-0.1 * x) * cos(x)">f(x) = e^(-0.1x) * cos(x)</button>
+                            </div>
+                        </div>
+
+                        <div class="navigation-instruction">
+                            <div class="instruction-row">
+                                <span class="action-badge">DRAG</span>
+                                <span class="action-desc">Pan coordinate viewport</span>
+                            </div>
+                            <div class="instruction-row">
+                                <span class="action-badge">SCROLL</span>
+                                <span class="action-desc">Zoom in / out around cursor</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-reset-viewport" id="btn-reset-view">RESET PORT VIEW</button>
+                    </div>
+
+                    <div class="grapher-right-panel">
+                        <div class="canvas-wrapper">
+                            <canvas id="graph-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Active Keystroke Indicator Overlay -->
+    <div class="keystroke-overlay" id="keystroke-indicator"></div>
+
+    <!-- Load main script files -->
+    <script src="parser.js"></script>
+    <script src="grapher.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
