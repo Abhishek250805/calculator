@@ -140,7 +140,10 @@ body[data-theme="polar"] {
     padding: 0;
     user-select: none;
     -webkit-user-drag: none;
+<<<<<<< HEAD
     -webkit-tap-highlight-color: transparent; /* Remove browser touch gray highlight boxes on mobile */
+=======
+>>>>>>> d82d4f032717cebb376265955041d539c350ad46
 }
 
 body {
@@ -715,9 +718,14 @@ input:checked + .slider-round:before {
 
 .calc-btn:active,
 .calc-btn.simulated-active {
+<<<<<<< HEAD
     transform: translateY(2px); /* Tighter springy depth */
     box-shadow: 0 0 15px var(--accent-primary); /* Beautiful glowing drop shadow! */
     border-color: var(--accent-primary);
+=======
+    transform: translateY(3px); /* Press down depth */
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+>>>>>>> d82d4f032717cebb376265955041d539c350ad46
     background-color: var(--btn-calc-active);
 }
 
@@ -749,8 +757,12 @@ input:checked + .slider-round:before {
 
 .calc-btn.evaluate-btn:active,
 .calc-btn.evaluate-btn.simulated-active {
+<<<<<<< HEAD
     transform: translateY(2px);
     box-shadow: 0 0 22px var(--accent-secondary);
+=======
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15), 0 4px 8px -2px var(--btn-eval-glow);
+>>>>>>> d82d4f032717cebb376265955041d539c350ad46
 }
 
 /* --------------------------------------------------------------------------
