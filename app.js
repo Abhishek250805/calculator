@@ -403,6 +403,46 @@ document.addEventListener('DOMContentLoaded', () => {
         stdCurrentDisplay.scrollLeft = stdCurrentDisplay.scrollWidth;
     }
 
+    function formatResult(res) {
+        if (typeof res !== 'number') return res.toString();
+        if (isNaN(res)) return 'NaN';
+        if (!isFinite(res)) return res > 0 ? 'Infinity' : '-Infinity';
+
+        const absVal = Math.abs(res);
+        
+        // 1. If it's too large or too small, use exponential notation to fit in 12 chars
+        if (absVal >= 1e12 || (absVal < 1e-6 && absVal > 0)) {
+            let expStr = res.toExponential(6); // e.g. "1.234567e+15" (12 chars)
+            if (res < 0) {
+                expStr = res.toExponential(5); // e.g. "-1.23456e+15" (12 chars)
+            }
+            return expStr;
+        }
+
+        // 2. Check standard string length
+        let str = res.toString();
+        if (str.length <= 12) return str;
+
+        // 3. If decimal, round to fit 12 characters
+        if (str.includes('.')) {
+            const dotIndex = str.indexOf('.');
+            let decimals = 12 - dotIndex - 1;
+            if (decimals > 0) {
+                let rounded = res.toFixed(decimals);
+                // Remove trailing zeros
+                rounded = rounded.replace(/\.?0+$/, '');
+                return rounded;
+            }
+        }
+
+        // 4. Fallback: use precision to guarantee fits in 12 chars
+        let precisionStr = res.toPrecision(10);
+        if (precisionStr.length > 12) {
+            precisionStr = res.toPrecision(8);
+        }
+        return precisionStr;
+    }
+
     function handleStandardBtnPress(action, val) {
         playTactileClick();
 
@@ -428,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = window.AuraParser.parseAndEvaluate(fullExpr);
                 standardHistory = `${standardHistory}${standardCurrent} =`;
-                standardCurrent = res.toString();
+                standardCurrent = formatResult(res);
                 isEvaluated = true;
 
                 addHistoryItem('Standard', fullExpr, res);
@@ -461,6 +501,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     standardHistory = '';
                     isEvaluated = false;
                 } else {
+                    // Count current digits to prevent overflow (limit to 12 digits)
+                    const digitCount = standardCurrent.replace(/[^0-9]/g, '').length;
+                    if (val !== '.' && digitCount >= 12) return;
+
                     if (standardCurrent === '0' && val !== '.') {
                         standardCurrent = val;
                     } else {
